@@ -1,2 +1,4 @@
-export const port = process.env.PORT | 3000;
-export const URI  =  'mongodb://localhost/markets';
+export const port           = process.env.PORT | 3000;
+export const URI            =  'mongodb://localhost/markets';
+export const SECRET_TOKEN   = "something good can work";
+export const APPNAME        = "MARKETS APP";

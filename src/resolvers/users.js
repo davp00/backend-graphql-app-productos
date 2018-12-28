@@ -2,6 +2,7 @@ import bcrypt   from 'bcrypt';
 import TokenController from '../controllers/jwt.controller';
 import MailController from '../controllers/mail.controller';
 import Response from '../classes/Response'; 
+import { getInsensibleString } from '../controllers/util.controller';
 
 const saltRounds = 10;
 
@@ -9,7 +10,7 @@ const saltRounds = 10;
 
     const Login = async (parent, args, { Models }) => 
     {
-        const user = await Models.UserModel.findOne( { email: args.email } );
+        const user = await Models.UserModel.findOne( { email: getInsensibleString( args.email ) } );
 
         if ( user )
         {
@@ -32,7 +33,7 @@ const saltRounds = 10;
 
     const PasswordRecovery = async ( parent, args, { Models } ) => 
     {
-        const user = await Models.UserModel.findOne({ email: args.email });
+        const user = await Models.UserModel.findOne({ email: getInsensibleString( args.email ) });
 
         if ( user )
         {
@@ -84,7 +85,7 @@ const saltRounds = 10;
 export default {
     Query: {
         Login,
-        PasswordRecovery
+        PasswordRecovery,
     },
     Mutation: {
         CreateUser,

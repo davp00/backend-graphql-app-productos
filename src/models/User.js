@@ -17,7 +17,8 @@ const UserSchema = mongoose.Schema({
         creation_date   : { type: Date , default: Date.now() },
         last_update     : { type: Date , default: Date.now() },
         token           : { type: String, default: undefined },
-        recovery_token  : { type: String , default: "" }
+        recovery_token  : { type: String , default: "" },
+        deleted_at      : { type: Date , default: null },
     }
 });
 

@@ -1,8 +1,8 @@
 export default class Response {
 
-    constructor(message, status)
+    constructor(statusCode, status)
     {
-        this.message = message;
+        this.statusCode = statusCode;
         this.status = status;
     }
 }

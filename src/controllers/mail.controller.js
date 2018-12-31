@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { APPNAME, EMAIL } from './../../config';
 const MailController    = {};
 
 
@@ -8,13 +9,13 @@ MailController.SendMail = (toMail, mailTitle, html, callBack) =>
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'no.replyteacherapp@gmail.com',
-            pass: 'Perro123'
+            user: EMAIL.user,
+            pass: EMAIL.pass,
         }
     });
 
     let mailOptions = {
-        from:'TeacherApp <no.replyteacherapp@gmail.com>',
+        from:`${ APPNAME } <${ EMAIL.user }>`,
         to: toMail,
         subject: mailTitle,
         html

@@ -32,11 +32,12 @@
     }
 
     type Query {
-        Login(email: String!, pass: String!): User
+        
         PasswordRecovery( email: String! ): Response
     }
 
     type Mutation {
+        Login(email: String!, pass: String!): User
         CreateUser( user: UserInput! ): Boolean
         UpdateUser: User
     }

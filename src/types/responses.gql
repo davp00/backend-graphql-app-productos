@@ -1,4 +1,4 @@
 type Response {
-    message: String
+    statusCode: Int
     status: Boolean
 }

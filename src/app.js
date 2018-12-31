@@ -2,6 +2,7 @@ import express  from 'express';
 import { port } from '../config';
 import path     from 'path';
 import mongoose from './database';
+import cors     from 'cors';
 
 
 // GRAPHQL
@@ -25,6 +26,8 @@ const schema = makeExecutableSchema({
 // MIDDLEWARES
 
     app.use( express.json() );
+    
+    app.use( cors() );
 
 //
 

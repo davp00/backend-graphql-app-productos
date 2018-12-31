@@ -21,7 +21,7 @@ const saltRounds = 10;
                     email   : user.email,
                     name    : user.name,
                     lastName: user.lastName
-                },2,'days');
+                },60,'days');
                 await user.save();
                 return user;
             }
@@ -50,14 +50,14 @@ const saltRounds = 10;
 
                 await user.save();
                 
-                return new Response('Hemos enviado un correo a su cuenta para que pueda recuperar su contraseña', true);
+                return new Response(200, true);
             }catch (erro) 
             {
-                return new Response('Ha ocurrido un error al enviar el correo', false);
+                return new Response(403, false);
             }
 
         }else 
-            return new Response('No existe ningun usuario con este correo', false);
+            return new Response(410, false);
     }
 
 ///
@@ -84,11 +84,11 @@ const saltRounds = 10;
 
 export default {
     Query: {
-        Login,
         PasswordRecovery,
     },
     Mutation: {
         CreateUser,
         UpdateUser,
+        Login
     }
 }

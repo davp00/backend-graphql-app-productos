@@ -26,19 +26,30 @@ const schema = makeExecutableSchema({
 // MIDDLEWARES
 
     app.use( express.json() );
-    
     app.use( cors() );
 
 //
 
 // ROUTES
-    app.use( '/', graphqlHTTP({
+    app.use( '/graphql', graphqlHTTP({
         schema,
         graphiql    : true,
         context     : {
             Models
         } 
     }));
+
+    /*
+    app.set('view engine', 'hbs');
+    app.use ('/public', express.static( path.join(__dirname, 'public') ) );
+    app.set('views', path.join(__dirname, 'public'));
+    app.use( '/mail', (req , res) => 
+    {
+        res.render('mail/passwordrecovery.hbs', {
+            link:'www.prueba2.com',
+            clientName: 'Daniel'
+        });
+    });*/
 //
 
 // SERVER

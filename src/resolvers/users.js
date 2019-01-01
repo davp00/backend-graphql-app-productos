@@ -38,17 +38,22 @@ const saltRounds = 10;
         if ( user )
         {
             try {
-
-                MailController.SendMail(user.email, 
-                    'Password Recovery', 
-                    'Para recuperar contraseña ingrese al siguiente enlace ...');
-
                 user.account.recovery_token = TokenController.Create({
                     _id: user._id
                 },
                 1, 'days');
 
                 await user.save();
+
+                MailController.SendMail(
+                    user.email, 
+                    'Recuperar contraseña', 
+                    0,
+                    {
+                        link:`${'www.link.com'}/recovery/${ user.account.recovery_token }`,
+                        clientName: `${ user.name } ${ user.lastName }`,
+                    }
+                );
                 
                 return new Response(200, true);
             }catch (erro) 

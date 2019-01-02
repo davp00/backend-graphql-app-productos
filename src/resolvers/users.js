@@ -72,11 +72,16 @@ const saltRounds = 10;
 
     const CreateUser = async ( parent, args, { Models } ) => 
     {
-        const { UserModel } = Models;
-        const user = new UserModel(args.user);
-        user.pass = await bcrypt.hash(user.pass, saltRounds);
-        await user.save();
-        return true;
+        try{
+            const { UserModel } = Models;
+            const user = new UserModel(args.user);
+            user.pass = await bcrypt.hash(user.pass, saltRounds);
+            await user.save();
+            return new Response(1, true);
+        }catch(e)
+        {
+            return new Response(2, false);
+        }
     }
 
     const UpdateUser = ( parent, args, { Models } ) => 

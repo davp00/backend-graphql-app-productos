@@ -1,4 +1,4 @@
 type Response {
     statusCode: Int
-    status: Boolean
+    success: Boolean
 }

@@ -13,22 +13,31 @@
         recovery_token  : String 
     }
 
+    type Profile {
+        name        : String!
+        lastName    : String!
+        image       : String
+    }
+
     type User {
         id          : ID!
         email       : String!
         pass        : String!
-        name        : String!
-        lastName    : String!
+        profile     : Profile!
         contact     : Contact
         account     : Account
+    }
+
+    input ProfileInput {
+        name        : String!
+        lastName    : String!
     }
 
 
     input UserInput {
         email       : String!
         pass        : String!
-        name        : String!
-        lastName    : String!
+        profile     : ProfileInput!
     }
 
     type Query {
@@ -38,6 +47,6 @@
 
     type Mutation {
         Login(email: String!, pass: String!): User
-        CreateUser( user: UserInput! ): Boolean
+        CreateUser( user: UserInput! ): Response
         UpdateUser: User
     }

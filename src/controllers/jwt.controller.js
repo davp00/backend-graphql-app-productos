@@ -48,7 +48,7 @@ TokenController.Decode = (token) =>
 
 TokenController.Auth = (req, res, next) =>
 {
-    if (!req.headers.authorization) next();
+    if (!req.headers.authorization) {next();return;}
 
     const token = req.headers.authorization.split(" ")[1];
     TokenController.Decode(token).then(

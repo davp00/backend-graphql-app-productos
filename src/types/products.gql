@@ -10,13 +10,25 @@ type Product {
     image: String
     tags: [String!]!
     category: Int
+    countable: Boolean
     amount: Int
     price: Float
     information: ProductInformation
 }
 
 input ProductInput {
-    name: String!
+    name: String
+    category: Int
     image: String
     tags: [String!]
+    countable: Boolean
+}
+
+type Query {
+    AllProducts: [Product]!
+}
+
+type Mutation {
+    CreateProduct( product: ProductInput! ): Product
+    UpdateProduct( id: String!, product: ProductInput): Boolean
 }

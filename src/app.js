@@ -4,6 +4,7 @@ import path     from 'path';
 import mongoose from './database';
 import cors     from 'cors';
 
+import TokenController from './controllers/jwt.controller';
 
 // GRAPHQL
 import graphqlHTTP from 'express-graphql';
@@ -28,15 +29,19 @@ const schema = makeExecutableSchema({
     app.use( express.json() );
     app.use( cors() );
 
+    app.use( ( req, res, next) => TokenController.Auth( req, res , next))
 //
 
 // ROUTES
-    app.use( '/graphql', graphqlHTTP({
-        schema,
-        graphiql    : true,
-        context     : {
-            Models
-        } 
+    app.use( '/graphql',graphqlHTTP( ( req, res, next) => {
+        return {
+            schema,
+            graphiql    : true,
+            context     : {
+                Models,
+                User: req.user
+            } 
+        }
     }));
 //
 

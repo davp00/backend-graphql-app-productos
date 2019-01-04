@@ -1,0 +1,22 @@
+type ProductInformation {
+    by: String
+    created_at: String
+    deleted_at: String
+}
+
+type Product {
+    id: ID!
+    name: String!
+    image: String
+    tags: [String!]!
+    category: Int
+    amount: Int
+    price: Float
+    information: ProductInformation
+}
+
+input ProductInput {
+    name: String!
+    image: String
+    tags: [String!]
+}

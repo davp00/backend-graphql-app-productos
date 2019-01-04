@@ -46,21 +46,17 @@ TokenController.Decode = (token) =>
 };
 
 
-TokenController.isAuth = (req, res, next) =>
+TokenController.Auth = (req, res, next) =>
 {
-    if (!req.headers.authorization) return res.status(403).send({message: 'No tienes autorización'});
+    if (!req.headers.authorization) next();
 
     const token = req.headers.authorization.split(" ")[1];
     TokenController.Decode(token).then(
         (data)=>
         {
             req.user = data;
+            console.log( req.user )
             next();
-        }
-    ).catch(
-        (error) =>
-        {
-            return res.status(error.status).send({message: error.message});
         }
     );
 };

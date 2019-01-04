@@ -18,9 +18,6 @@ const saltRounds = 10;
             {
                 user.account.token = TokenController.Create({
                     _id     : user._id,
-                    email   : user.email,
-                    name    : user.name,
-                    lastName: user.lastName
                 },60,'days');
                 await user.save();
                 return user;

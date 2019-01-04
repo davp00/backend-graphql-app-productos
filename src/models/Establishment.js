@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 import ClientSchema from './Schemas/Client';
+import ProductSchema  from './Schemas/Product.schema';
 
 
 const EstablishmentSchema = new Schema({
@@ -10,16 +11,10 @@ const EstablishmentSchema = new Schema({
 
 
     workers     : { type: Array, default: [] },
-    products    : [
-        {
-            price       : { type: Number, required: true },
-            _idProduct  : { type: String, required: true }
-        }
-    ],
+    
+    products    : [ ProductSchema ],
 
     clients     : [ ClientSchema ],
-
-    
 
 });
 

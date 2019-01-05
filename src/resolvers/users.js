@@ -70,13 +70,19 @@ const saltRounds = 10;
     const CreateUser = async ( parent, args, { Models } ) => 
     {
         try{
-            const { UserModel } = Models;
-            const user = new UserModel(args.user);
-            user.pass = await bcrypt.hash(user.pass, saltRounds);
+            const { UserModel }     = Models;
+            const lastUser          = await UserModel.findOne().sort({_id: -1}).limit(1);
+            const user              = new UserModel(args.user);
+
+            user.pass           = await bcrypt.hash(user.pass, saltRounds);
+            user.account.code   = (lastUser && lastUser.account.code)? lastUser.account.code + 1 : 1 ;
+
             await user.save();
+
             return new Response(1, true);
         }catch(e)
         {
+            console.error( e );
             return new Response(2, false);
         }
     }

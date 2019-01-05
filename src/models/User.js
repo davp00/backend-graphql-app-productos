@@ -21,6 +21,7 @@ const UserSchema = new Schema({
 
     account     : {
         type            : { type: Number,   default: 1 },
+        code            : { type: Number,   required: false },
         creation_date   : { type: Date ,    default: Date.now() },
         last_update     : { type: Date ,    default: Date.now() },
         token           : { type: String,   default: undefined },

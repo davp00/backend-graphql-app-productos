@@ -5,6 +5,7 @@ import ProductSchema  from './Schemas/Product.schema';
 
 const EstablishmentSchema = new Schema({
 
+    name        : { type: String, required: true},
     type        : { type: Number, default: 1 } ,
     owner       : { type: String, required: true} ,
     verified    : { type: Boolean, default: false},

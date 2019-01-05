@@ -7,6 +7,7 @@
     }
     
     type Account {
+        code            : Int
         creation_date   : String
         last_update     : String
         token           : String

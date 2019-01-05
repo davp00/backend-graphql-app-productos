@@ -55,7 +55,6 @@ TokenController.Auth = (req, res, next) =>
         (data)=>
         {
             req.user = data;
-            console.log( req.user )
             next();
         }
     );

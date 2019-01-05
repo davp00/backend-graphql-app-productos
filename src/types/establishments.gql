@@ -1,0 +1,25 @@
+type Establishment {
+    name        : String!
+    type        : Int!
+    owner       : User!
+    image       : String
+    verified    : Boolean
+
+    workers     : [User!]!
+    product     : [Product!]!
+
+    client      : [String]!
+}
+
+input EstInput {
+    name        : String!
+    type        : Int
+}
+
+type Mutation {
+    CreateEstablishment( est: EstInput! ): Response
+}
+
+type Query {
+    getStablishments: [Establishment!]!
+}

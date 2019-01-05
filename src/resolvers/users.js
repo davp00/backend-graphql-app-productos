@@ -82,7 +82,6 @@ const saltRounds = 10;
             return new Response(1, true);
         }catch(e)
         {
-            console.error( e );
             return new Response(2, false);
         }
     }

@@ -4,10 +4,12 @@ import Response from '../classes/Response';
     const CreateEstablishment = async (parent, args, { Models, User }) => 
     {
         try {
-            const { EstModel }  = Models;
-            const est           = new EstModel( args.est );
+            const { EstModel }      = Models;
+            const lasEst            = await EstModel.findOne().sort({_id: -1}).limit(1);
+            const est               = new EstModel( args.est );
             
             est.owner   = User._id;
+            est.code    = ( lasEst )? lasEst.code + 1 : 1; 
 
             await est.save();
          
@@ -28,13 +30,20 @@ import Response from '../classes/Response';
         });
     };
 
+    const getStablishment = async ( parent, args, { Models, User } ) =>
+    {
+        const est = Models.EstModel.findOne({ code: args.code });
+        return est;
+    }
+
 export default {
     Mutation: {
         CreateEstablishment
     },
 
     Query: {
-        getStablishments
+        getStablishments,
+        getStablishment
     },
 
     Establishment: {

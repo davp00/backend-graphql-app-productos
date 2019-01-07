@@ -4,9 +4,10 @@ type Establishment {
     owner       : User!
     image       : String
     verified    : Boolean
+    code        : Int
 
     workers     : [User!]!
-    product     : [Product!]!
+    products    : [Product!]!
 
     client      : [String]!
 }
@@ -21,5 +22,6 @@ type Mutation {
 }
 
 type Query {
-    getStablishments: [Establishment!]!
+    getStablishments                : [Establishment!]!
+    getStablishment( code: Int! )    : Establishment
 }

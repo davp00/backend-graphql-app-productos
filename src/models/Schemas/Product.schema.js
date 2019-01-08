@@ -11,14 +11,18 @@ const ProductSchema = new Schema({
     countable   : { type: Boolean, required: false, default: true},
 
     amount      : { type: Number, required: false, default: undefined },
-    price       : { type: Types.Decimal128 , required: false, default: undefined },
+    price       : { type: Number , required: false, default: undefined },
 
     information : {
         by          : String,
-        created_at  : { type: Date, default: Date.now() },
-        deleted_at  : { type: Date, default: undefined}
+        created_at  : { type: Date, default: Date.now(), required: false },
+        deleted_at  : { type: Date, default: undefined, required: false },
+        added_at    : { type: Date, default: undefined, required: false },
     }
 
+},
+{
+    versionKey: false 
 });
 
 export default ProductSchema;

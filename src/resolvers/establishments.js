@@ -21,6 +21,36 @@ import Response from '../classes/Response';
     };
 
 
+    const addProduct = async ( parent, args, { Models } ) => 
+    {
+        const { ProductModel, EstModel }    = Models;
+        const { item }                      = args;
+
+        const product = await ProductModel.findById( item.idProduct );
+
+        try {
+            product.amount                  = item.amount;
+            product.information             = { added_at: new Date() };
+            product.price                   = item.price;
+            
+            await EstModel.updateOne( {code : item.estCode }, {
+               $push: {
+                   products: {
+                     $each : [ product ],
+                     $sort : { name: 1 }
+                   },
+               } 
+            });
+
+            return new Response(1, true);
+        }catch( e ) 
+        {
+            console.error( e );
+            return new Response(2, false);
+        }
+    };
+
+
 // Querys
 
     const getStablishments = async ( parent, args, { Models, User } ) =>
@@ -38,7 +68,8 @@ import Response from '../classes/Response';
 
 export default {
     Mutation: {
-        CreateEstablishment
+        CreateEstablishment,
+        addProduct
     },
 
     Query: {

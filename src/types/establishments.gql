@@ -17,11 +17,19 @@ input EstInput {
     type        : Int
 }
 
+input EstItem {
+    estCode: Int!
+    idProduct: String!
+    amount: Int
+    price: Float
+}
+
 type Mutation {
     CreateEstablishment( est: EstInput! ): Response
+    addProduct( item: EstItem! ): Response
 }
 
 type Query {
     getStablishments                : [Establishment!]!
-    getStablishment( code: Int! )    : Establishment
+    getStablishment( code: Int! )   : Establishment
 }

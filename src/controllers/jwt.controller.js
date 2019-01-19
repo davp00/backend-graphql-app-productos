@@ -51,13 +51,14 @@ TokenController.Auth = (req, res, next) =>
     if (!req.headers.authorization) {next();return;}
 
     const token = req.headers.authorization.split(" ")[1];
+    
     TokenController.Decode(token).then(
         (data)=>
         {
             req.user = data;
             next();
         }
-    );
+    ).catch( ( e ) => {req.user = null; next();} );
 };
 
 export default TokenController;

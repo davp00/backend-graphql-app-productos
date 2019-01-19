@@ -24,6 +24,7 @@
         id          : ID!
         email       : String!
         pass        : String!
+        fullName    : String
         profile     : Profile!
         contact     : Contact
         account     : Account

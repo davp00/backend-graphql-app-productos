@@ -1,4 +1,5 @@
 import Response from '../classes/Response';
+import { filterComparator } from '../controllers/util.controller';
 
 // Mutations
     const CreateEstablishment = async (parent, args, { Models, User }) => 
@@ -45,7 +46,7 @@ import Response from '../classes/Response';
             return new Response(1, true);
         }catch( e ) 
         {
-            console.error( e );
+            console.error(  );
             return new Response(2, false);
         }
     };
@@ -66,6 +67,17 @@ import Response from '../classes/Response';
         return est;
     }
 
+    const productFilter = async ( obj, { name, filter }, context) => 
+    {
+        if ( !name )
+            return obj.products;
+
+        return obj.products.filter( ( product ) => 
+        {
+            return filterComparator( product.name, name );
+        });
+    };
+
 export default {
     Mutation: {
         CreateEstablishment,
@@ -80,5 +92,6 @@ export default {
     Establishment: {
         owner   : ( obj , args, { Models } ) => Models.UserModel.findById( obj.owner ),
         workers : ( obj , args, { Models } ) => Models.UserModel.find( { _id: { $in: obj.workers } } ),
+        products: productFilter
     }
 }

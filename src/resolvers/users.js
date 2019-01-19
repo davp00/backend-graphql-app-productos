@@ -11,7 +11,6 @@ const saltRounds = 10;
     const Login = async (parent, args, { Models }) => 
     {
         const user = await Models.UserModel.findOne( { email: getInsensibleString( args.email ) } );
-
         if ( user )
         {
             if ( bcrypt.compareSync( args.pass , user.pass ))
@@ -19,6 +18,7 @@ const saltRounds = 10;
                 user.account.token = TokenController.Create({
                     _id     : user._id,
                 },60,'days');
+                
                 await user.save();
                 return user;
             }
@@ -102,5 +102,8 @@ export default {
         CreateUser,
         UpdateUser,
         Login
+    },
+    User: {
+        fullName: ( obj, args, context) => obj.profile.name + ' ' + obj.profile.lastName
     }
 }

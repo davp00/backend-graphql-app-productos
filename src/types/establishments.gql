@@ -7,7 +7,7 @@ type Establishment {
     code        : Int
 
     workers     : [User!]!
-    products    : [Product!]!
+    products    ( name: String ,filter: String )    : [Product!]!
 
     client      : [String]!
 }
